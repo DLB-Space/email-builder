@@ -1,12 +1,14 @@
-import React from 'react';
+import React from "react";
 import EditorPage from "./pages/Editor";
+import { store } from "./store";
+import { Provider } from "react-redux";
 
 const App = () => {
   return (
-    <div className="App">
+    <Provider store={store} className="App">
       <EditorPage />
-    </div>
+    </Provider>
   );
-}
+};
 
 export default App;
