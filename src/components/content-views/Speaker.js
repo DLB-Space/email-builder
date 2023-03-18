@@ -3,10 +3,11 @@ import SpeakerImage from "../../assets/speaker_image.svg";
 import { useDropzone } from "react-dropzone";
 import Text from "./Text";
 
-const Speaker = () => {
+const Speaker = ({item, uploadImage}) => {
   const [image, setImage] = useState("");
 
   const onDrop = useCallback((acceptedFiles) => {
+    uploadImage(acceptedFiles[0])
     setImage(URL.createObjectURL(acceptedFiles[0]));
   }, []);
   const { getRootProps, getInputProps } = useDropzone({ onDrop });
@@ -17,7 +18,7 @@ const Speaker = () => {
         <div {...getRootProps()}>
           <input {...getInputProps()} />
           <img
-            src={image || SpeakerImage}
+            src={item.img || image || SpeakerImage}
             alt="speaker"
             className="pr-5 object-contain"
             style={{ width: 100, height: 100 }}
@@ -26,8 +27,8 @@ const Speaker = () => {
       </div>
 
       <div className="flex flex-col justify-center" style={{ maxWidth: 392 }}>
-        <Text text={"<b>Имя Фамилия,</b> Должность"} />
-        <Text text={"<b>Тема,</b> . . ."} />
+        <Text text={item.fioAndJob} classnames="text-sm" />
+        <Text text={item.theme} classnames="text-sm"/>
       </div>
     </div>
   );

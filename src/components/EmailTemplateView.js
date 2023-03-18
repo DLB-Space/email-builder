@@ -6,27 +6,50 @@ import Logo from "../assets/loog.svg";
 import Text from "./content-views/Text";
 import Button from "./content-views/Button";
 import { ANNOUNCE_TEMPLATE } from "../templates/Announce";
+import { BELIEF_TEMPLATE } from "../templates/Belief";
+import { FEEDBACK_TEMPLATE } from "../templates/Feedback";
+import { REMINDER_TEMPLATE } from "../templates/Reminder";
+import { REPORT_TEMPLATE } from "../templates/Report";
 import { TYPES } from "../constants/content-types";
 import Speaker from "./content-views/Speaker";
 import Footer from "./content-views/Footer";
 import { useDropzone } from "react-dropzone";
 import { setImage } from "./tools/cover-settings/headerImageSlice";
+import axios from "axios";
 
 const EmailTemplateView = () => {
   const headerImage = useSelector((store) => store.headerImage);
   const preheader = useSelector((store) => store.preheaderSettings);
-
+  const store = useSelector((store) => {
+    return store
+  })
+  console.log("🚀 ~ file: EmailTemplateView.js:24 ~ EmailTemplateView ~ store:", store)
   const dispatch = useDispatch();
+
+  const uploadImage = (img) => {
+    let body = new FormData()
+    body.set('key', 'd17eaabe08e1b406bff10321818a53fd')
+    body.append('image', img)
+
+    return axios({
+      method: 'post',
+      url: 'https://api.imgbb.com/1/upload',
+      data: body
+    })
+  }
 
   const onDrop = useCallback(
     (acceptedFiles) => {
-      dispatch(setImage(URL.createObjectURL(acceptedFiles[0])));
+      uploadImage(acceptedFiles[0]).then(res => {
+        dispatch(setImage(res.data.data.url));
+      })
     },
     [dispatch]
   );
 
   const { getRootProps, getInputProps } = useDropzone({ onDrop });
 
+  // todo добавить ключи рендера
   const renderContentItem = (item) => {
     switch (item.type) {
       case TYPES.HEADER_LG: {
@@ -36,7 +59,7 @@ const EmailTemplateView = () => {
         return <Button to="/" text={item.text} />;
       }
       case TYPES.SPEAKER: {
-        return <Speaker />;
+        return <Speaker item={item} uploadImage={uploadImage}/>;
       }
       case TYPES.TEXT_BOLD: {
         return <Text text={item.text} classnames="text-sm font-bold pb-6" />;

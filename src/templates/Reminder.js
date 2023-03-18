@@ -1,6 +1,6 @@
 import { TYPES } from "../constants/content-types";
 
-export const ANNOUNCE_TEMPLATE = [
+export const REMINDER_TEMPLATE = [
   {
     type: TYPES.HEADER_LG,
     text: "Друзья, добрый день!",
@@ -43,17 +43,13 @@ export const ANNOUNCE_TEMPLATE = [
     linkTo: '',
   },
   {
-    type: TYPES.TEXT,
-    text: "В этот раз обсудим, как настроить качественный подбор линейных работников и менеджеров, чтобы угодить внутреннему заказчику, выходить на ценных специалистов и быстро закрывать сложные вакансии. Разберём подходы, которые помогут HR усилить бренд работодателя, настроить адаптацию и обучение под новые запросы персонала в реалиях 2023 года.",
+    type: TYPES.TEXT_BOLD,
+    text: "Будем рады видеть вас 30 марта в 09:30, Grand Autograph Hotel Novosibirsk (2 этаж), ул. Орджоникидзе, 31",
   },
   {
     type: TYPES.BUTTON,
     text: "Зарегистрироваться",
     linkTo: '',
-  },
-  {
-    type: TYPES.TEXT_BOLD,
-    text: "Будем рады видеть вас 30 марта в 09:30, Grand Autograph Hotel Novosibirsk (2 этаж), ул. Орджоникидзе, 31",
   },
   {
     type: TYPES.FOOTER,

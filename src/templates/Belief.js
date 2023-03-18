@@ -1,6 +1,6 @@
 import { TYPES } from "../constants/content-types";
 
-export const ANNOUNCE_TEMPLATE = [
+export const BELIEF_TEMPLATE = [
   {
     type: TYPES.HEADER_LG,
     text: "Друзья, добрый день!",
@@ -18,24 +18,28 @@ export const ANNOUNCE_TEMPLATE = [
     img: '',
     fioAndJob: 'Имя Фамилия, Должность',
     theme: 'Тема: . . .',
+    theses: '',
   },
   {
     type: TYPES.SPEAKER,
     img: '',
     fioAndJob: 'Имя Фамилия, Должность',
     theme: 'Тема: . . .',
+    theses: '',
   },
   {
     type: TYPES.SPEAKER,
     img: '',
     fioAndJob: 'Имя Фамилия, Должность',
     theme: 'Тема: . . .',
+    theses: '',
   },
   {
     type: TYPES.SPEAKER,
     img: '',
     fioAndJob: 'Имя Фамилия, Должность',
     theme: 'Тема: . . .',
+    theses: '',
   },
   {
     type: TYPES.BUTTON,
