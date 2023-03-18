@@ -3,12 +3,9 @@ import express from "express";
 import bodyParser from "body-parser";
 import { genHTML } from "./generator.js";
 
-import { fileURLToPath } from "url";
-import { dirname } from "path";
-
 const port = 3002;
 const app = express();
-
+app.use(express.static('dist'))
 app.use(bodyParser.json());
 app.use(
   bodyParser.urlencoded({
@@ -24,8 +21,9 @@ app.get("/", (request, response) => {
 
     stream.end(html);
   });
+
   response.set("Content-Type", "text/html");
-  response.send(JSON.stringify("linkString"));
+  response.send(JSON.stringify(fileName));
 });
 
 // Start the server
