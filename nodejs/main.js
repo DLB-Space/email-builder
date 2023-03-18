@@ -1,103 +1,35 @@
 import fs from "fs";
+import express from "express";
+import bodyParser from "body-parser";
+import { genHTML } from "./generator.js";
 
-// импортируем компоненты
-import { getBody } from "./body.js";
-import { data } from "./data.js";
-import { getButton } from "./components/button.js";
-import { getContentCover } from "./components/content-cover.js";
-import { getH1 } from "./components/h1.js";
-import { getH2 } from "./components/h2.js";
-import { getPlainText } from "./components/plain-text.js";
-import { getBoldText } from "./components/bold-text.js";
-import { getHeader } from "./components/header.js";
-import { getRegistrarionLink } from "./components/header-registration-link.js";
-import { getPreheader } from "./components/preheader.js";
-import { getSpeakersBox } from "./components/speaker-box.js";
-import { getSpeaker } from "./components/speaker.js";
-import { getFooter } from "./components/footer.js";
+import { fileURLToPath } from "url";
+import { dirname } from "path";
 
-// todo speakers
-// todo preheader
+const port = 3002;
+const app = express();
 
-function genHTML() {
-  let body = getBody();
+app.use(bodyParser.json());
+app.use(
+  bodyParser.urlencoded({
+    extended: true,
+  })
+);
 
-  body = body.replace("<!-- PREHEADER -->", getPreheader(data.preheader));
-  body = body.replace("<!--HEADER-->", getHeader(data.utm));
+app.get("/", (request, response) => {
+  const fileName = "./dist/index.html";
+  const stream = fs.createWriteStream(fileName);
+  stream.once("open", function (fd) {
+    var html = genHTML();
 
-  if (data.title && data.title.showLink) {
-    body = body.replace(
-      "<!-- REGISTRATION LINK -->",
-      getRegistrarionLink(data.title.link)
-    );
-  }
+    stream.end(html);
+  });
+  response.set("Content-Type", "text/html");
+  response.send(JSON.stringify("linkString"));
+});
 
-  if (data.cover) {
-    body = body.replace(
-      "<!-- COVER -->",
-      getContentCover(data.cover.source, data.cover.link)
-    );
-  }
-
-  if (data.content) {
-    let content = "";
-    data.content.forEach((item) => {
-      switch (item.type) {
-        case "HEADER_LG": {
-          content += getH1(item.text);
-          break;
-        }
-        case "TEXT": {
-          content += getPlainText(item.text);
-          break;
-        }
-        case "HEADER_BASE": {
-          content += getH2(item.text);
-          break;
-        }
-        case "BUTTON": {
-          content += getButton(item.text, item.linkTo);
-          break;
-        }
-        case "TEXT_BOLD": {
-          content += getBoldText(item.text);
-          break;
-        }
-        case "SPEAKERS": {
-          content += getSpeakersBox();
-          let speakers = "";
-          item.speakers.forEach((speaker) => {
-            speakers += getSpeaker(
-              speaker.img,
-              speaker.fioAndJob,
-              speaker.theme
-            );
-          });
-          content = content.replace("<!-- SPEAKERS -->", speakers);
-          break;
-        }
-        case "FOOTER": {
-          content += getFooter();
-          break;
-        }
-        default:
-          content += "";
-          break;
-      }
-    });
-
-    body = body.replace("<!-- CONTENT -->", content);
-  }
-
-  return body;
-}
-
-const fileName = "./created.html";
-const stream = fs.createWriteStream(fileName);
-
-// генерируем html и записываем в html файл
-stream.once("open", function (fd) {
-  var html = genHTML();
-
-  stream.end(html);
+// Start the server
+const server = app.listen(port, (error) => {
+  if (error) return console.log(`Error: ${error}`);
+  console.log(`Server listening on port ${server.address().port}`);
 });

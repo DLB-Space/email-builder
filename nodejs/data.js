@@ -6,7 +6,7 @@ export const data = {
   },
   utm: "day_omsk",
   cover: {
-    source: "https://i.ibb.co/Jj3RMq6/2023-03-07-13-59-1.png",
+    source: "https://i.ibb.co/0YSjW7L/2023-03-07-13-59-1.png",
     link: "https://google.com",
   },
   content: [
@@ -27,25 +27,25 @@ export const data = {
       speakers: [
         {
           type: "SPEAKER",
-          img: "https://i.ibb.co/Gs07xsG/image.png",
+          img: "https://i.ibb.co/4RrcSmN/image.png",
           fioAndJob: "Имя Фамилия, Должность",
           theme: "Тема: . . .",
         },
         {
           type: "SPEAKER",
-          img: "https://i.ibb.co/Gs07xsG/image.png",
+          img: "https://i.ibb.co/4RrcSmN/image.png",
           fioAndJob: "Имя Фамилия, Должность",
           theme: "Тема: . . .",
         },
         {
           type: "SPEAKER",
-          img: "https://i.ibb.co/Gs07xsG/image.png",
+          img: "https://i.ibb.co/4RrcSmN/image.png",
           fioAndJob: "Имя Фамилия, Должность",
           theme: "Тема: . . .",
         },
         {
           type: "SPEAKER",
-          img: "https://i.ibb.co/Gs07xsG/image.png",
+          img: "https://i.ibb.co/4RrcSmN/image.png",
           fioAndJob: "Имя Фамилия, Должность",
           theme: "Тема: . . .",
         },
