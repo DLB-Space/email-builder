@@ -1,5 +1,4 @@
 import { getBody } from "./body.js";
-import { data } from "./data.js";
 import { getButton } from "./components/button.js";
 import { getContentCover } from "./components/content-cover.js";
 import { getH1 } from "./components/h1.js";
@@ -13,7 +12,7 @@ import { getSpeakersBox } from "./components/speaker-box.js";
 import { getSpeaker } from "./components/speaker.js";
 import { getFooter } from "./components/footer.js";
 
-export const genHTML = () => {
+export const genHTML = (data) => {
   let body = getBody();
 
   body = body.replace("<!-- PREHEADER -->", getPreheader(data.preheader));

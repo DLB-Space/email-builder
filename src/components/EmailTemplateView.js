@@ -20,10 +20,6 @@ import axios from "axios";
 const EmailTemplateView = () => {
   const headerImage = useSelector((store) => store.headerImage);
   const preheader = useSelector((store) => store.preheaderSettings);
-  const store = useSelector((store) => {
-    return store
-  })
-  console.log("🚀 ~ file: EmailTemplateView.js:24 ~ EmailTemplateView ~ store:", store)
   const dispatch = useDispatch();
 
   const uploadImage = (img) => {
