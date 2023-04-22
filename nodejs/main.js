@@ -18,15 +18,15 @@ app.use(bodyParser.json());
 app.post('/generate', async (req, res) => {
 
   // Set CORS headers
-  res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
-  res.header('Access-Control-Allow-Methods', 'POST');
+  // res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+  // res.header('Access-Control-Allow-Methods', 'POST');
 
   const { data } = req.body;
   const result = `You sent me: ${data}`;
 
   try {
     const fileName = "./dist/index.html";
-    const html = genHTML(result);
+    const html = genHTML(data);
     await fs.promises.writeFile(fileName, html);
 
     const link = `${req.protocol}://${req.get('host')}/index.html`;

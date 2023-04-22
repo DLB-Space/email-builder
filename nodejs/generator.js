@@ -11,6 +11,7 @@ import { getPreheader } from "./components/preheader.js";
 import { getSpeakersBox } from "./components/speaker-box.js";
 import { getSpeaker } from "./components/speaker.js";
 import { getFooter } from "./components/footer.js";
+import { getSpacer } from './components/spacer.js';
 
 export const genHTML = (data) => {
   let body = getBody();
@@ -67,6 +68,10 @@ export const genHTML = (data) => {
             );
           });
           content = content.replace("<!-- SPEAKERS -->", speakers);
+          break;
+        }
+        case "SPACER": {
+          content+= getSpacer();
           break;
         }
         case "FOOTER": {

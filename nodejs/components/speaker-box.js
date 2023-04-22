@@ -7,7 +7,7 @@ export const getSpeakersBox = () => {
     style="
       padding: 0;
       margin: 0;
-      padding-bottom: 0px;
+      padding-bottom: 20px;
       padding-left: 0px;
       padding-right: 0px;
     "
